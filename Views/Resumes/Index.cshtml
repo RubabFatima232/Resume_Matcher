@@ -1,0 +1,67 @@
+﻿@model List<ResumeMatcher.Models.Resume>
+@{
+    ViewData["Title"] = "Resumes";
+}
+
+<div class="flex-between mb-4">
+    <div>
+        <div class="page-title">Resume Library</div>
+        <div class="page-subtitle">Candidate resumes upload aur manage karo</div>
+    </div>
+    <a asp-action="Upload" class="btn btn-primary"><i class="fas fa-upload"></i> Upload Resume</a>
+</div>
+
+@if (!Model.Any())
+{
+    <div class="glass-card">
+        <div class="empty-state">
+            <span class="icon">📂</span>
+            <p>Koi resume upload nahi hua abhi tak</p>
+            <a asp-action="Upload" class="btn btn-primary"><i class="fas fa-upload"></i> Pehla Resume Upload Karo</a>
+        </div>
+    </div>
+}
+else
+{
+    <div class="glass-card" style="overflow:hidden;">
+        <table>
+            <thead>
+                <tr>
+                    <th>Candidate</th>
+                    <th>File</th>
+                    <th>Uploaded</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var r in Model)
+                {
+                    <tr>
+                        <td>
+                            <div style="display:flex;align-items:center;gap:12px;">
+                                <div style="width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#4f46e5,#7c3aed);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                    <i class="fas fa-user" style="font-size:0.85rem;"></i>
+                                </div>
+                                <span class="font-bold">@r.CandidateName</span>
+                            </div>
+                        </td>
+                        <td class="text-muted text-sm"><i class="fas fa-paperclip text-purple"></i> @r.FileName</td>
+                        <td class="text-muted text-sm">@r.UploadedAt.ToString("MMM dd, yyyy")</td>
+                        <td>
+                            <div class="flex gap-2">
+                                <a asp-controller="Match" asp-action="Index" class="btn btn-primary" style="padding:6px 14px;font-size:0.82rem;">
+                                    <i class="fas fa-magic"></i> Analyze
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@r.Id"
+                                   onclick="return confirm('Delete karna chahte ho?')"
+                                   class="btn btn-danger">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

@@ -1,0 +1,73 @@
+﻿@model List<ResumeMatcher.Models.Job>
+@{
+    ViewData["Title"] = "Jobs";
+}
+
+<div class="flex-between mb-4">
+    <div>
+        <div class="page-title">Job Listings</div>
+        <div class="page-subtitle">Job positions create aur manage karo</div>
+    </div>
+    <a asp-action="Create" class="btn btn-success"><i class="fas fa-plus"></i> Add Job</a>
+</div>
+
+@if (!Model.Any())
+{
+    <div class="glass-card">
+        <div class="empty-state">
+            <span class="icon">💼</span>
+            <p>Koi job add nahi ki abhi tak</p>
+            <a asp-action="Create" class="btn btn-success"><i class="fas fa-plus"></i> Pehli Job Add Karo</a>
+        </div>
+    </div>
+}
+else
+{
+    <div class="row">
+        @foreach (var job in Model)
+        {
+            <div class="col-3">
+                <div class="glass-card p-4" data-tilt style="display:flex;flex-direction:column;gap:14px;height:100%;">
+                    <div class="flex-between">
+                        <div style="width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,#059669,#047857);display:flex;align-items:center;justify-content:center;">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <span class="badge badge-green">Active</span>
+                    </div>
+                    <div>
+                        <div class="font-bold" style="font-size:1rem;margin-bottom:4px;">@job.Title</div>
+                        <div class="text-muted text-sm">
+                            <i class="fas fa-building"></i> @job.Company
+                            @if (!string.IsNullOrEmpty(job.Location))
+                            {
+                                <span> &middot; <i class="fas fa-map-marker-alt"></i> @job.Location</span>
+                            }
+                        </div>
+                    </div>
+                    <div class="text-muted text-sm" style="line-height:1.55;overflow:hidden;max-height:46px;">
+                        @(job.Description.Length > 95 ? job.Description[..95] + "..." : job.Description)
+                    </div>
+                    @if (!string.IsNullOrEmpty(job.RequiredSkills))
+                    {
+                        <div>
+                            @foreach (var s in job.RequiredSkills.Split(',').Take(4))
+                            {
+                                <span class="chip chip-purple">@s.Trim()</span>
+                            }
+                        </div>
+                    }
+                    <div class="flex gap-2" style="margin-top:auto;">
+                        <a asp-controller="Match" asp-action="Index" class="btn btn-primary" style="flex:1;justify-content:center;padding:8px;">
+                            <i class="fas fa-magic"></i> Analyze
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@job.Id"
+                           onclick="return confirm('Delete?')"
+                           class="btn btn-danger">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

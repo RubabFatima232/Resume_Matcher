@@ -1,0 +1,173 @@
+﻿@{
+    Layout = null;
+    var jobsList = ViewBag.JobsList as List<ResumeMatcher.Controllers.JobSpaceModel>;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Corporate Job Workspace</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+            body {
+                font-family: 'Inter', sans-serif;
+                background: radial-gradient(circle at 10% 20%, #0f192d 0%, #050a19 100%) !important;
+                color: #eef2ff !important;
+                min-height: 100vh;
+                padding: 30px 20px;
+            }
+
+            .glass-nav {
+                background: rgba(255, 255, 255, 0.04);
+                backdrop-filter: blur(16px);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 24px;
+            }
+
+            .glass-card {
+                background: rgba(255, 255, 255, 0.03);
+                backdrop-filter: blur(12px);
+                border: 1px solid rgba(255, 255, 255, 0.08) !important;
+                border-radius: 28px;
+                box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            }
+
+            .form-control-custom {
+                background: rgba(0, 0, 0, 0.2) !important;
+                border: 1px solid rgba(255, 255, 255, 0.1) !important;
+                color: white !important;
+                border-radius: 14px;
+                padding: 12px;
+            }
+
+            .btn-glow {
+                background: linear-gradient(95deg, #4f46e5 0%, #7c3aed 100%);
+                border: none;
+                padding: 14px 28px;
+                border-radius: 16px;
+                color: white;
+                font-weight: 600;
+                width: 100%;
+                transition: all 0.2s;
+                box-shadow: 0 10px 20px rgba(124,58,237,0.2);
+            }
+
+            .btn-outline-custom {
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                color: #eef2ff;
+                border-radius: 30px;
+                padding: 8px 18px;
+                text-decoration: none;
+                display: inline-flex;
+                align-items: center;
+            }
+
+            .matrix-badge {
+                background: rgba(124, 58, 237, 0.15);
+                border: 1px solid rgba(124, 58, 237, 0.3);
+                color: #d8b4fe;
+                padding: 5px 14px;
+                border-radius: 12px;
+                font-size: 0.8rem;
+                display: inline-block;
+                margin: 4px 6px 0 0;
+            }
+
+            .text-gradient {
+                color: #ffffff;
+            }
+    </style>
+</head>
+<body>
+    <div class="container" style="max-width: 1300px;">
+        <div class="d-flex justify-content-between align-items-center mb-5 p-4 glass-nav">
+            <div>
+                <h1 class="fw-bold mb-0 text-gradient" style="font-size: 2.2rem;">AI ResumeMatch</h1>
+                <p class="text-white-50 small mb-0 mt-1"><i class="fas fa-briefcase text-primary me-1"></i> Job Vector Workspace</p>
+            </div>
+            <div class="d-flex gap-2">
+                <a href="/Home/Index" class="btn-outline-custom small"><i class="fas fa-home me-1"></i> Dashboard</a>
+                <a href="/Home/Jobs" class="btn-outline-custom small"><i class="fas fa-briefcase me-1"></i> Jobs</a>
+                <a href="/Home/Resumes" class="btn-outline-custom small"><i class="fas fa-database me-1"></i> Resumes</a>
+                <a href="/Home/Match" class="btn-outline-custom small"><i class="fas fa-chart-pie me-1"></i> Reports</a>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-5">
+                <div class="glass-card p-4">
+                    <h5 class="fw-bold mb-4"><i class="fas fa-folder-plus text-primary me-2"></i>Configure Corporate Matrix</h5>
+                    <form action="/Home/AddJob" method="post">
+                        <div class="mb-3">
+                            <label class="small text-white-50 mb-2">Job Profile Title</label>
+                            <input type="text" id="jobTitle" name="title" class="form-control form-control-custom" placeholder="e.g. DevOps Engineer" required />
+                        </div>
+                        <div class="mb-3">
+                            <label class="small text-white-50 mb-2">Required Core Skills (Comma Separated)</label>
+                            <input type="text" id="coreSkills" name="skills" class="form-control form-control-custom" placeholder="Docker, Linux" required />
+                        </div>
+                        <div class="mb-3">
+                            <button type="button" id="btnAI" onclick="generateAIRules()" class="btn btn-sm btn-outline-info w-100 rounded-3 py-2 fw-bold" style="color:#22d3ee;"><i class="fas fa-robot me-1"></i> Auto-Generate Rules</button>
+                        </div>
+                        <div class="mb-3">
+                            <label class="small text-white-50 mb-2">High Score Rules (&gt;80%)</label>
+                            <textarea id="highRules" name="highRules" class="form-control form-control-custom" rows="2"></textarea>
+                        </div>
+                        <div class="mb-4">
+                            <label class="small text-white-50 mb-2">Low Score Rules (&lt;80%)</label>
+                            <textarea id="lowRules" name="lowRules" class="form-control form-control-custom" rows="2"></textarea>
+                        </div>
+                        <button type="submit" class="btn-glow"><i class="fas fa-plus me-1"></i> Provision Job Vector Space</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-md-7">
+                <div class="d-flex flex-column gap-3">
+                    @if (jobsList != null)
+                    {
+                        foreach (var job in jobsList)
+                        {
+                            <div class="glass-card p-4">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <h4 class="fw-bold text-white mb-1">@job.Title</h4>
+                                        <p class="small text-white-50 mb-3">Workspace Token ID: #@job.Id</p>
+                                    </div>
+                                    <span class="badge bg-success bg-opacity-10 text-success border border-success border-opacity-25 px-3 py-2 rounded-pill small">Active</span>
+                                </div>
+                                <div class="d-flex flex-wrap gap-1">
+                                    @if (job.Skills != null)
+                                    {
+                                        foreach (var skill in job.Skills)
+                                        {
+                                            <span class="matrix-badge"><i class="fas fa-tag me-1 text-muted"></i>@skill</span>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+            function generateAIRules() {
+                const title = document.getElementById("jobTitle").value;
+                const skills = document.getElementById("coreSkills").value;
+                if (!title || !skills) { alert("Pehle details enter karein!"); return; }
+                fetch("/Home/GetAIRules?title=" + encodeURIComponent(title) + "&skills=" + encodeURIComponent(skills))
+                    .then(res => res.json()).then(data => {
+                        if (data.success) {
+                            document.getElementById("highRules").value = data.high;
+                            document.getElementById("lowRules").value = data.low;
+                        }
+                    });
+            }
+    </script>
+</body>
+</html>

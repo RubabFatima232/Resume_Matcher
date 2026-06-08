@@ -1,0 +1,72 @@
+﻿@model ResumeMatcher.ViewModels.UploadResumeViewModel
+@{
+    ViewData["Title"] = "Upload Resume";
+}
+
+<div style="max-width:580px;margin:0 auto;">
+    <div class="page-title">Upload Resume</div>
+    <div class="page-subtitle">PDF ya DOCX file upload karo</div>
+
+    <div class="glass-card p-5">
+        <form asp-action="Upload" method="post" enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+
+            <div class="form-group">
+                <label class="form-label"><i class="fas fa-user"></i> Candidate Name *</label>
+                <input asp-for="CandidateName" class="form-control" placeholder="Ali Hassan" />
+                <span asp-validation-for="CandidateName" class="text-red text-sm"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label"><i class="fas fa-file-upload"></i> Resume File (PDF ya DOCX) *</label>
+                <div class="drop-zone" id="dropZone"
+                     onclick="document.getElementById('fileInput').click();"
+                     ondragover="event.preventDefault();this.classList.add('dragover');"
+                     ondragleave="this.classList.remove('dragover');"
+                     ondrop="handleFileDrop(event);">
+                    <span class="drop-icon">📁</span>
+                    <div class="font-bold mb-1">File yahan drop karo</div>
+                    <div class="text-muted text-sm">ya click karo browse karne ke liye</div>
+                    <div id="fileNameDisplay" style="margin-top:12px;color:#34d399;font-size:0.85rem;display:none;"></div>
+                </div>
+                <input type="file" id="fileInput" name="ResumeFile" accept=".pdf,.docx" style="display:none;" onchange="showFile(this)" />
+                <span asp-validation-for="ResumeFile" class="text-red text-sm"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-full justify-center" style="padding:13px;font-size:0.95rem;">
+                <i class="fas fa-upload"></i> Upload & Parse Karo
+            </button>
+        </form>
+    </div>
+
+    <div style="text-align:center;margin-top:14px;">
+        <a asp-action="Index" class="text-muted text-sm" style="text-decoration:none;">
+            <i class="fas fa-arrow-left"></i> Back to Resumes
+        </a>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function showFile(input) {
+            if (input.files[0]) {
+                var d = document.getElementById('fileNameDisplay');
+                d.innerHTML = '<i class="fas fa-check-circle"></i> ' + input.files[0].name;
+                d.style.display = 'block';
+                document.getElementById('dropZone').style.borderColor = '#10b981';
+            }
+        }
+        function handleFileDrop(e) {
+            e.preventDefault();
+            e.currentTarget.classList.remove('dragover');
+            var file = e.dataTransfer.files[0];
+            if (file) {
+                var input = document.getElementById('fileInput');
+                var dt = new DataTransfer();
+                dt.items.add(file);
+                input.files = dt.files;
+                showFile(input);
+            }
+        }
+    </script>
+}

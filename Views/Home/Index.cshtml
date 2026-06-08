@@ -1,0 +1,168 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Neural Pipeline Vector Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+            body {
+                font-family: 'Inter', sans-serif;
+                background: radial-gradient(circle at 10% 20%, rgba(15, 25, 45, 1) 0%, rgba(5, 10, 25, 1) 100%) !important;
+                color: #eef2ff !important;
+                min-height: 100vh;
+                padding: 30px 20px;
+            }
+
+            .glass-nav {
+                background: rgba(255, 255, 255, 0.04);
+                backdrop-filter: blur(16px);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 24px;
+            }
+
+            .glass-card {
+                background: rgba(255, 255, 255, 0.03);
+                backdrop-filter: blur(12px);
+                border: 1px solid rgba(255, 255, 255, 0.08) !important;
+                border-radius: 28px;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            }
+
+            .btn-outline-custom {
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                color: #eef2ff;
+                border-radius: 30px;
+                padding: 8px 18px;
+                text-decoration: none;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.2s;
+            }
+
+                .btn-outline-custom:hover {
+                    background: rgba(255,255,255,0.08);
+                    color: #fff;
+                }
+
+            .metric-box {
+                background: rgba(0,0,0,0.15);
+                border: 1px solid rgba(255,255,255,0.04);
+                border-radius: 20px;
+                padding: 24px;
+                text-align: center;
+            }
+
+            .btn-configure {
+                background: linear-gradient(95deg, #4f46e5 0%, #7c3aed 100%);
+                border: none;
+                padding: 14px 28px;
+                border-radius: 16px;
+                color: white;
+                font-weight: 600;
+                display: inline-flex;
+                width: 100%;
+                justify-content: center;
+                text-decoration: none;
+                transition: all 0.2s;
+                box-shadow: 0 10px 20px rgba(124,58,237,0.2);
+            }
+
+                .btn-configure:hover {
+                    opacity: 0.95;
+                    color: white;
+                    transform: translateY(-1px);
+                }
+    </style>
+</head>
+<body>
+    <div class="container" style="max-width: 1300px;">
+        <div class="d-flex justify-content-between align-items-center mb-5 p-4 glass-nav">
+            <div>
+                <h1 class="fw-bold mb-0" style="font-size: 2.2rem; color: #ffffff;"><a href="/Home/Index" style="text-decoration:none; color:inherit;">AI ResumeMatch</a></h1>
+                <p class="text-white-50 small mb-0 mt-1"><i class="fas fa-rocket text-success me-1"></i> Neural Pipeline Vector Dashboard</p>
+            </div>
+            <div class="d-flex gap-2 align-items-center">
+                <a href="/Home/Index" class="btn-outline-custom small"><i class="fas fa-home me-1"></i> Dashboard</a>
+                <a href="/Home/Jobs" class="btn-outline-custom small"><i class="fas fa-briefcase me-1"></i> Jobs</a>
+                <a href="/Home/Resumes" class="btn-outline-custom small"><i class="fas fa-database me-1"></i> Resumes</a>
+                <a href="/Home/Match" class="btn-outline-custom small"><i class="fas fa-chart-pie me-1"></i> Reports</a>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="glass-card p-4 h-100">
+                    <h5 class="fw-bold mb-3"><i class="fas fa-cubes text-primary me-2"></i>3D Spatial Skills Vector Radar</h5>
+                    <p class="text-white-50 small mb-4">Interacting real-time matrix topology overlaying memory layers.</p>
+                    <div class="d-flex justify-content-center align-items-center" style="min-height: 280px;">
+
+                        <svg width="240" height="240" viewBox="0 0 200 200" style="overflow: visible;">
+
+                            <g>
+                                <animateTransform attributeName="transform" type="rotate" from="0 100 100" to="360 100 100" dur="25s" repeatCount="indefinite" />
+
+                                <circle cx="100" cy="100" r="80" fill="none" stroke="rgba(124, 58, 237, 0.35)" stroke-width="1.5" />
+                                <circle cx="100" cy="100" r="50" fill="none" stroke="rgba(124, 58, 237, 0.2)" stroke-width="1" />
+                                <circle cx="100" cy="100" r="20" fill="none" stroke="rgba(124, 58, 237, 0.1)" stroke-width="1" />
+
+                                <line x1="100" y1="20" x2="100" y2="180" stroke="rgba(255,255,255,0.12)" stroke-width="1" />
+                                <line x1="20" y1="100" x2="180" y2="100" stroke="rgba(255,255,255,0.12)" stroke-width="1" />
+                                <line x1="43.4" y1="43.4" x2="156.6" y2="156.6" stroke="rgba(255,255,255,0.06)" stroke-width="1" />
+                                <line x1="43.4" y1="156.6" x2="156.6" y2="43.4" stroke="rgba(255,255,255,0.06)" stroke-width="1" />
+                            </g>
+
+                            <g opacity="0.4">
+                                <animateTransform attributeName="transform" type="rotate" from="360 100 100" to="0 100 100" dur="12s" repeatCount="indefinite" />
+                                <polygon points="100,20 180,100 100,180 20,100" fill="none" stroke="rgba(168, 85, 247, 0.15)" stroke-width="1" stroke-dasharray="4,4" />
+                            </g>
+
+                            <g>
+                                <polygon points="100,45 145,115 85,150 65,85" fill="rgba(124, 58, 237, 0.35)" stroke="#a855f7" stroke-width="2" />
+                                <circle cx="100" cy="45" r="4.5" fill="#10b981" />
+                                <circle cx="145" cy="115" r="4.5" fill="#10b981" />
+                                <circle cx="65" cy="85" r="4.5" fill="#10b981" />
+                            </g>
+                        </svg>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="glass-card p-4 h-100">
+                    <h5 class="fw-bold mb-4"><i class="fas fa-chart-line me-2" style="color:#a78bfa;"></i>Pipeline Execution Layer</h5>
+                    <div class="row g-3 mb-4">
+                        <div class="col-6">
+                            <div class="metric-box">
+                                <i class="fas fa-briefcase text-info mb-2" style="font-size: 1.5rem;"></i>
+                                <div class="text-white-50 small">Stored Job Profiles</div>
+                                <h3 class="fw-bold mt-1 text-white">@ViewBag.TotalJobs</h3>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="metric-box">
+                                <i class="fas fa-id-card text-success mb-2" style="font-size: 1.5rem;"></i>
+                                <div class="text-white-50 small">Parsed Resumes</div>
+                                <h3 class="fw-bold mt-1 text-white">@ViewBag.TotalResumes</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-4 rounded-4 mb-4" style="background: rgba(99,102,241,0.05); border: 1px solid rgba(99,102,241,0.15);">
+                        <p class="small text-white-50 mb-0 lh-lg">
+                            <i class="fas fa-info-circle text-primary me-2"></i><strong>System Matrix Active:</strong> Database caching arrays successfully initiated. Navigate through the top modules to register custom corporate records dynamically into the engine space runtime.
+                        </p>
+                    </div>
+                    <a href="/Home/Jobs" class="btn-configure"><i class="fas fa-cog me-2"></i> Configure Job Vector Space &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

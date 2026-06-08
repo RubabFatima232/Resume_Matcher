@@ -1,0 +1,415 @@
+2026-05-31 10:51:33.864 +05:00 [INF] Executed DbCommand (35ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-05-31 10:51:34.008 +05:00 [INF] Executed DbCommand (67ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND [o].[object_id] NOT IN (SELECT [ep].[major_id]
+        FROM [sys].[extended_properties] AS [ep]
+        WHERE [ep].[minor_id] = 0
+            AND [ep].[class] = 1
+            AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2026-05-31 10:51:34.033 +05:00 [INF] User profile is available. Using 'C:\Users\BOSS\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-05-31 10:51:34.192 +05:00 [INF] Now listening on: https://localhost:7001
+2026-05-31 10:51:34.193 +05:00 [INF] Now listening on: http://localhost:5001
+2026-05-31 10:51:34.199 +05:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-05-31 10:51:34.201 +05:00 [INF] Hosting environment: Development
+2026-05-31 10:51:34.204 +05:00 [INF] Content root path: C:\Users\BOSS\VS\ResumeMatcher
+2026-05-31 10:51:58.586 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7001/ - null null
+2026-05-31 10:51:58.661 +05:00 [INF] Executing endpoint 'ResumeMatcher.Controllers.HomeController.Index (ResumeMatcher)'
+2026-05-31 10:51:58.749 +05:00 [INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index() on controller ResumeMatcher.Controllers.HomeController (ResumeMatcher).
+2026-05-31 10:52:00.239 +05:00 [INF] Executed DbCommand (92ms) [Parameters=[@p='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [m0].[Id], [m0].[AISummary], [m0].[AnalyzedAt], [m0].[JobId], [m0].[MatchScore], [m0].[MatchedSkills], [m0].[MissingSkills], [m0].[Recommendation], [m0].[ResumeId], [r].[Id], [r].[CandidateName], [r].[Education], [r].[Experience], [r].[ExtractedText], [r].[FileName], [r].[Skills], [r].[UploadedAt], [j].[Id], [j].[Company], [j].[CreatedAt], [j].[Description], [j].[IsActive], [j].[Location], [j].[RequiredExperience], [j].[RequiredSkills], [j].[Title]
+FROM (
+    SELECT TOP(@p) [m].[Id], [m].[AISummary], [m].[AnalyzedAt], [m].[JobId], [m].[MatchScore], [m].[MatchedSkills], [m].[MissingSkills], [m].[Recommendation], [m].[ResumeId]
+    FROM [MatchResults] AS [m]
+    ORDER BY [m].[AnalyzedAt] DESC
+) AS [m0]
+INNER JOIN [Resumes] AS [r] ON [m0].[ResumeId] = [r].[Id]
+INNER JOIN [Jobs] AS [j] ON [m0].[JobId] = [j].[Id]
+ORDER BY [m0].[AnalyzedAt] DESC
+2026-05-31 10:52:00.357 +05:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Resumes] AS [r]
+2026-05-31 10:52:00.384 +05:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Jobs] AS [j]
+2026-05-31 10:52:00.399 +05:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [MatchResults] AS [m]
+2026-05-31 10:52:00.465 +05:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [MatchResults] AS [m]) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-05-31 10:52:00.509 +05:00 [INF] Executing ViewResult, running view Index.
+2026-05-31 10:52:00.582 +05:00 [INF] Executed ViewResult - view Index executed in 72.6304ms.
+2026-05-31 10:52:00.594 +05:00 [INF] Executed action ResumeMatcher.Controllers.HomeController.Index (ResumeMatcher) in 1837.0626ms
+2026-05-31 10:52:00.600 +05:00 [INF] Executed endpoint 'ResumeMatcher.Controllers.HomeController.Index (ResumeMatcher)'
+2026-05-31 10:52:00.622 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7001/ - 200 null text/html; charset=utf-8 2040.8746ms
+2026-05-31 10:52:00.714 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7001/favicon.ico - null null
+2026-05-31 10:52:00.774 +05:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'C:\Users\BOSS\VS\ResumeMatcher\wwwroot\favicon.ico'
+2026-05-31 10:52:00.779 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7001/favicon.ico - 200 5430 image/x-icon 64.0853ms
+2026-05-31 11:32:21.064 +05:00 [INF] Application is shutting down...
+2026-05-31 11:36:33.342 +05:00 [INF] Executed DbCommand (32ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-05-31 11:36:33.493 +05:00 [INF] Executed DbCommand (71ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND [o].[object_id] NOT IN (SELECT [ep].[major_id]
+        FROM [sys].[extended_properties] AS [ep]
+        WHERE [ep].[minor_id] = 0
+            AND [ep].[class] = 1
+            AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2026-05-31 11:36:33.520 +05:00 [INF] User profile is available. Using 'C:\Users\BOSS\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-05-31 11:36:33.706 +05:00 [INF] Now listening on: https://localhost:7001
+2026-05-31 11:36:33.708 +05:00 [INF] Now listening on: http://localhost:5001
+2026-05-31 11:36:33.715 +05:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-05-31 11:36:33.718 +05:00 [INF] Hosting environment: Development
+2026-05-31 11:36:33.721 +05:00 [INF] Content root path: C:\Users\BOSS\VS\ResumeMatcher
+2026-05-31 11:36:41.767 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7001/ - null null
+2026-05-31 11:36:41.814 +05:00 [INF] Executing endpoint 'ResumeMatcher.Controllers.HomeController.Index (ResumeMatcher)'
+2026-05-31 11:36:41.859 +05:00 [INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index() on controller ResumeMatcher.Controllers.HomeController (ResumeMatcher).
+2026-05-31 11:36:43.206 +05:00 [INF] Executed DbCommand (86ms) [Parameters=[@p='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [m0].[Id], [m0].[AISummary], [m0].[AnalyzedAt], [m0].[JobId], [m0].[MatchScore], [m0].[MatchedSkills], [m0].[MissingSkills], [m0].[Recommendation], [m0].[ResumeId], [r].[Id], [r].[CandidateName], [r].[Education], [r].[Experience], [r].[ExtractedText], [r].[FileName], [r].[Skills], [r].[UploadedAt], [j].[Id], [j].[Company], [j].[CreatedAt], [j].[Description], [j].[IsActive], [j].[Location], [j].[RequiredExperience], [j].[RequiredSkills], [j].[Title]
+FROM (
+    SELECT TOP(@p) [m].[Id], [m].[AISummary], [m].[AnalyzedAt], [m].[JobId], [m].[MatchScore], [m].[MatchedSkills], [m].[MissingSkills], [m].[Recommendation], [m].[ResumeId]
+    FROM [MatchResults] AS [m]
+    ORDER BY [m].[AnalyzedAt] DESC
+) AS [m0]
+INNER JOIN [Resumes] AS [r] ON [m0].[ResumeId] = [r].[Id]
+INNER JOIN [Jobs] AS [j] ON [m0].[JobId] = [j].[Id]
+ORDER BY [m0].[AnalyzedAt] DESC
+2026-05-31 11:36:43.316 +05:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Resumes] AS [r]
+2026-05-31 11:36:43.345 +05:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Jobs] AS [j]
+2026-05-31 11:36:43.365 +05:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [MatchResults] AS [m]
+2026-05-31 11:36:43.424 +05:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [MatchResults] AS [m]) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-05-31 11:36:43.477 +05:00 [INF] Executing ViewResult, running view Index.
+2026-05-31 11:36:43.545 +05:00 [INF] Executed ViewResult - view Index executed in 65.2745ms.
+2026-05-31 11:36:43.561 +05:00 [INF] Executed action ResumeMatcher.Controllers.HomeController.Index (ResumeMatcher) in 1696.4029ms
+2026-05-31 11:36:43.571 +05:00 [INF] Executed endpoint 'ResumeMatcher.Controllers.HomeController.Index (ResumeMatcher)'
+2026-05-31 11:36:43.603 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7001/ - 200 null text/html; charset=utf-8 1837.1991ms
+2026-05-31 11:46:17.682 +05:00 [INF] Application is shutting down...
+2026-05-31 11:47:31.876 +05:00 [INF] Executed DbCommand (48ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-05-31 11:47:32.102 +05:00 [INF] Executed DbCommand (85ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND [o].[object_id] NOT IN (SELECT [ep].[major_id]
+        FROM [sys].[extended_properties] AS [ep]
+        WHERE [ep].[minor_id] = 0
+            AND [ep].[class] = 1
+            AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2026-05-31 11:47:32.149 +05:00 [INF] User profile is available. Using 'C:\Users\BOSS\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-05-31 11:47:32.418 +05:00 [INF] Now listening on: https://localhost:7001
+2026-05-31 11:47:32.422 +05:00 [INF] Now listening on: http://localhost:5001
+2026-05-31 11:47:32.430 +05:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-05-31 11:47:32.433 +05:00 [INF] Hosting environment: Development
+2026-05-31 11:47:32.437 +05:00 [INF] Content root path: C:\Users\BOSS\VS\ResumeMatcher
+2026-05-31 11:51:33.343 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7001/ - null null
+2026-05-31 11:51:33.412 +05:00 [INF] Executing endpoint 'ResumeMatcher.Controllers.HomeController.Index (ResumeMatcher)'
+2026-05-31 11:51:33.476 +05:00 [INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index() on controller ResumeMatcher.Controllers.HomeController (ResumeMatcher).
+2026-05-31 11:51:35.025 +05:00 [INF] Executed DbCommand (91ms) [Parameters=[@p='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [m0].[Id], [m0].[AISummary], [m0].[AnalyzedAt], [m0].[JobId], [m0].[MatchScore], [m0].[MatchedSkills], [m0].[MissingSkills], [m0].[Recommendation], [m0].[ResumeId], [r].[Id], [r].[CandidateName], [r].[Education], [r].[Experience], [r].[ExtractedText], [r].[FileName], [r].[Skills], [r].[UploadedAt], [j].[Id], [j].[Company], [j].[CreatedAt], [j].[Description], [j].[IsActive], [j].[Location], [j].[RequiredExperience], [j].[RequiredSkills], [j].[Title]
+FROM (
+    SELECT TOP(@p) [m].[Id], [m].[AISummary], [m].[AnalyzedAt], [m].[JobId], [m].[MatchScore], [m].[MatchedSkills], [m].[MissingSkills], [m].[Recommendation], [m].[ResumeId]
+    FROM [MatchResults] AS [m]
+    ORDER BY [m].[AnalyzedAt] DESC
+) AS [m0]
+INNER JOIN [Resumes] AS [r] ON [m0].[ResumeId] = [r].[Id]
+INNER JOIN [Jobs] AS [j] ON [m0].[JobId] = [j].[Id]
+ORDER BY [m0].[AnalyzedAt] DESC
+2026-05-31 11:51:35.156 +05:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Resumes] AS [r]
+2026-05-31 11:51:35.191 +05:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Jobs] AS [j]
+2026-05-31 11:51:35.217 +05:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [MatchResults] AS [m]
+2026-05-31 11:51:35.296 +05:00 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [MatchResults] AS [m]) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-05-31 11:51:35.353 +05:00 [INF] Executing ViewResult, running view Index.
+2026-05-31 11:51:35.436 +05:00 [INF] Executed ViewResult - view Index executed in 80.2083ms.
+2026-05-31 11:51:35.458 +05:00 [INF] Executed action ResumeMatcher.Controllers.HomeController.Index (ResumeMatcher) in 1973.375ms
+2026-05-31 11:51:35.467 +05:00 [INF] Executed endpoint 'ResumeMatcher.Controllers.HomeController.Index (ResumeMatcher)'
+2026-05-31 11:51:35.501 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7001/ - 200 null text/html; charset=utf-8 2162.4587ms
+2026-05-31 12:13:16.942 +05:00 [INF] Application is shutting down...
+2026-05-31 12:13:36.972 +05:00 [INF] Executed DbCommand (24ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-05-31 12:13:37.155 +05:00 [INF] Executed DbCommand (102ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND [o].[object_id] NOT IN (SELECT [ep].[major_id]
+        FROM [sys].[extended_properties] AS [ep]
+        WHERE [ep].[minor_id] = 0
+            AND [ep].[class] = 1
+            AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2026-05-31 12:13:37.195 +05:00 [INF] User profile is available. Using 'C:\Users\BOSS\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-05-31 12:13:37.419 +05:00 [INF] Now listening on: https://localhost:7001
+2026-05-31 12:13:37.424 +05:00 [INF] Now listening on: http://localhost:5001
+2026-05-31 12:13:37.431 +05:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-05-31 12:13:37.435 +05:00 [INF] Hosting environment: Development
+2026-05-31 12:13:37.439 +05:00 [INF] Content root path: C:\Users\BOSS\VS\ResumeMatcher
+2026-05-31 12:13:51.567 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7001/ - null null
+2026-05-31 12:13:51.628 +05:00 [INF] Executing endpoint 'ResumeMatcher.Controllers.HomeController.Index (ResumeMatcher)'
+2026-05-31 12:13:51.685 +05:00 [INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index() on controller ResumeMatcher.Controllers.HomeController (ResumeMatcher).
+2026-05-31 12:13:53.085 +05:00 [INF] Executed DbCommand (108ms) [Parameters=[@p='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [m0].[Id], [m0].[AISummary], [m0].[AnalyzedAt], [m0].[JobId], [m0].[MatchScore], [m0].[MatchedSkills], [m0].[MissingSkills], [m0].[Recommendation], [m0].[ResumeId], [r].[Id], [r].[CandidateName], [r].[Education], [r].[Experience], [r].[ExtractedText], [r].[FileName], [r].[Skills], [r].[UploadedAt], [j].[Id], [j].[Company], [j].[CreatedAt], [j].[Description], [j].[IsActive], [j].[Location], [j].[RequiredExperience], [j].[RequiredSkills], [j].[Title]
+FROM (
+    SELECT TOP(@p) [m].[Id], [m].[AISummary], [m].[AnalyzedAt], [m].[JobId], [m].[MatchScore], [m].[MatchedSkills], [m].[MissingSkills], [m].[Recommendation], [m].[ResumeId]
+    FROM [MatchResults] AS [m]
+    ORDER BY [m].[AnalyzedAt] DESC
+) AS [m0]
+INNER JOIN [Resumes] AS [r] ON [m0].[ResumeId] = [r].[Id]
+INNER JOIN [Jobs] AS [j] ON [m0].[JobId] = [j].[Id]
+ORDER BY [m0].[AnalyzedAt] DESC
+2026-05-31 12:13:53.203 +05:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Resumes] AS [r]
+2026-05-31 12:13:53.233 +05:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Jobs] AS [j]
+2026-05-31 12:13:53.253 +05:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [MatchResults] AS [m]
+2026-05-31 12:13:53.317 +05:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [MatchResults] AS [m]) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-05-31 12:13:53.361 +05:00 [INF] Executing ViewResult, running view Index.
+2026-05-31 12:13:53.415 +05:00 [INF] Executed ViewResult - view Index executed in 52.6183ms.
+2026-05-31 12:13:53.427 +05:00 [INF] Executed action ResumeMatcher.Controllers.HomeController.Index (ResumeMatcher) in 1733.9133ms
+2026-05-31 12:13:53.433 +05:00 [INF] Executed endpoint 'ResumeMatcher.Controllers.HomeController.Index (ResumeMatcher)'
+2026-05-31 12:13:53.451 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7001/ - 200 null text/html; charset=utf-8 1888.3238ms
+2026-05-31 12:13:56.374 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7001/ - null null
+2026-05-31 12:13:56.394 +05:00 [INF] Executing endpoint 'ResumeMatcher.Controllers.HomeController.Index (ResumeMatcher)'
+2026-05-31 12:13:56.400 +05:00 [INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index() on controller ResumeMatcher.Controllers.HomeController (ResumeMatcher).
+2026-05-31 12:13:56.716 +05:00 [INF] Executed DbCommand (1ms) [Parameters=[@p='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [m0].[Id], [m0].[AISummary], [m0].[AnalyzedAt], [m0].[JobId], [m0].[MatchScore], [m0].[MatchedSkills], [m0].[MissingSkills], [m0].[Recommendation], [m0].[ResumeId], [r].[Id], [r].[CandidateName], [r].[Education], [r].[Experience], [r].[ExtractedText], [r].[FileName], [r].[Skills], [r].[UploadedAt], [j].[Id], [j].[Company], [j].[CreatedAt], [j].[Description], [j].[IsActive], [j].[Location], [j].[RequiredExperience], [j].[RequiredSkills], [j].[Title]
+FROM (
+    SELECT TOP(@p) [m].[Id], [m].[AISummary], [m].[AnalyzedAt], [m].[JobId], [m].[MatchScore], [m].[MatchedSkills], [m].[MissingSkills], [m].[Recommendation], [m].[ResumeId]
+    FROM [MatchResults] AS [m]
+    ORDER BY [m].[AnalyzedAt] DESC
+) AS [m0]
+INNER JOIN [Resumes] AS [r] ON [m0].[ResumeId] = [r].[Id]
+INNER JOIN [Jobs] AS [j] ON [m0].[JobId] = [j].[Id]
+ORDER BY [m0].[AnalyzedAt] DESC
+2026-05-31 12:13:56.730 +05:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Resumes] AS [r]
+2026-05-31 12:13:56.743 +05:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Jobs] AS [j]
+2026-05-31 12:13:56.758 +05:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [MatchResults] AS [m]
+2026-05-31 12:13:56.771 +05:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [MatchResults] AS [m]) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-05-31 12:13:56.783 +05:00 [INF] Executing ViewResult, running view Index.
+2026-05-31 12:13:56.796 +05:00 [INF] Executed ViewResult - view Index executed in 14.3817ms.
+2026-05-31 12:13:56.804 +05:00 [INF] Executed action ResumeMatcher.Controllers.HomeController.Index (ResumeMatcher) in 392.4112ms
+2026-05-31 12:13:56.814 +05:00 [INF] Executed endpoint 'ResumeMatcher.Controllers.HomeController.Index (ResumeMatcher)'
+2026-05-31 12:13:56.825 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7001/ - 200 null text/html; charset=utf-8 450.8241ms
+2026-05-31 15:51:50.649 +05:00 [INF] Executed DbCommand (47ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2026-05-31 15:51:50.879 +05:00 [INF] Executed DbCommand (107ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND [o].[object_id] NOT IN (SELECT [ep].[major_id]
+        FROM [sys].[extended_properties] AS [ep]
+        WHERE [ep].[minor_id] = 0
+            AND [ep].[class] = 1
+            AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2026-05-31 15:51:50.924 +05:00 [INF] User profile is available. Using 'C:\Users\BOSS\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-05-31 15:51:51.276 +05:00 [INF] Now listening on: https://localhost:7001
+2026-05-31 15:51:51.279 +05:00 [INF] Now listening on: http://localhost:5001
+2026-05-31 15:51:51.287 +05:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-05-31 15:51:51.290 +05:00 [INF] Hosting environment: Development
+2026-05-31 15:51:51.293 +05:00 [INF] Content root path: C:\Users\BOSS\VS\ResumeMatcher
+2026-05-31 15:52:09.741 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7001/ - null null
+2026-05-31 15:52:09.791 +05:00 [INF] Executing endpoint 'ResumeMatcher.Controllers.HomeController.Index (ResumeMatcher)'
+2026-05-31 15:52:09.858 +05:00 [INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index() on controller ResumeMatcher.Controllers.HomeController (ResumeMatcher).
+2026-05-31 15:52:11.223 +05:00 [INF] Executed DbCommand (78ms) [Parameters=[@p='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [m0].[Id], [m0].[AISummary], [m0].[AnalyzedAt], [m0].[JobId], [m0].[MatchScore], [m0].[MatchedSkills], [m0].[MissingSkills], [m0].[Recommendation], [m0].[ResumeId], [r].[Id], [r].[CandidateName], [r].[Education], [r].[Experience], [r].[ExtractedText], [r].[FileName], [r].[Skills], [r].[UploadedAt], [j].[Id], [j].[Company], [j].[CreatedAt], [j].[Description], [j].[IsActive], [j].[Location], [j].[RequiredExperience], [j].[RequiredSkills], [j].[Title]
+FROM (
+    SELECT TOP(@p) [m].[Id], [m].[AISummary], [m].[AnalyzedAt], [m].[JobId], [m].[MatchScore], [m].[MatchedSkills], [m].[MissingSkills], [m].[Recommendation], [m].[ResumeId]
+    FROM [MatchResults] AS [m]
+    ORDER BY [m].[AnalyzedAt] DESC
+) AS [m0]
+INNER JOIN [Resumes] AS [r] ON [m0].[ResumeId] = [r].[Id]
+INNER JOIN [Jobs] AS [j] ON [m0].[JobId] = [j].[Id]
+ORDER BY [m0].[AnalyzedAt] DESC
+2026-05-31 15:52:11.317 +05:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Resumes] AS [r]
+2026-05-31 15:52:11.338 +05:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Jobs] AS [j]
+2026-05-31 15:52:11.353 +05:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [MatchResults] AS [m]
+2026-05-31 15:52:11.398 +05:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [MatchResults] AS [m]) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-05-31 15:52:11.437 +05:00 [INF] Executing ViewResult, running view Index.
+2026-05-31 15:52:11.500 +05:00 [INF] Executed ViewResult - view Index executed in 61.6216ms.
+2026-05-31 15:52:11.514 +05:00 [INF] Executed action ResumeMatcher.Controllers.HomeController.Index (ResumeMatcher) in 1648.8386ms
+2026-05-31 15:52:11.522 +05:00 [INF] Executed endpoint 'ResumeMatcher.Controllers.HomeController.Index (ResumeMatcher)'
+2026-05-31 15:52:11.553 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7001/ - 200 null text/html; charset=utf-8 1814.4608ms
+2026-05-31 15:53:54.121 +05:00 [FTL] Unable to reload configuration.
+System.ArgumentNullException: Value cannot be null. (Parameter 'path2')
+   at System.ArgumentNullException.Throw(String paramName)
+   at System.IO.Path.Combine(String path1, String path2)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.CertificatePathWatcher.RemoveWatchUnsynchronized(CertificateConfig certificateConfig)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.CertificatePathWatcher.UpdateWatches(List`1 certificateConfigsToRemove, List`1 certificateConfigsToAdd)
+   at Microsoft.AspNetCore.Server.Kestrel.KestrelConfigurationLoader.Reload()
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.RebindAsync()
+2026-05-31 20:08:30.355 +05:00 [INF] Executed DbCommand (36ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+PRAGMA journal_mode = 'wal';
+2026-05-31 20:08:30.730 +05:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Jobs" (
+    "Id" INTEGER NOT NULL CONSTRAINT "PK_Jobs" PRIMARY KEY AUTOINCREMENT,
+    "Title" TEXT NOT NULL,
+    "Company" TEXT NOT NULL,
+    "Description" TEXT NOT NULL,
+    "RequiredSkills" TEXT NULL,
+    "RequiredExperience" TEXT NULL,
+    "Location" TEXT NULL,
+    "CreatedAt" TEXT NOT NULL,
+    "IsActive" INTEGER NOT NULL
+);
+2026-05-31 20:08:30.736 +05:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Resumes" (
+    "Id" INTEGER NOT NULL CONSTRAINT "PK_Resumes" PRIMARY KEY AUTOINCREMENT,
+    "CandidateName" TEXT NOT NULL,
+    "FileName" TEXT NOT NULL,
+    "ExtractedText" TEXT NOT NULL,
+    "Skills" TEXT NULL,
+    "Experience" TEXT NULL,
+    "Education" TEXT NULL,
+    "UploadedAt" TEXT NOT NULL
+);
+2026-05-31 20:08:30.742 +05:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "MatchResults" (
+    "Id" INTEGER NOT NULL CONSTRAINT "PK_MatchResults" PRIMARY KEY AUTOINCREMENT,
+    "ResumeId" INTEGER NOT NULL,
+    "JobId" INTEGER NOT NULL,
+    "MatchScore" REAL NOT NULL,
+    "MatchedSkills" TEXT NULL,
+    "MissingSkills" TEXT NULL,
+    "AISummary" TEXT NULL,
+    "Recommendation" TEXT NULL,
+    "AnalyzedAt" TEXT NOT NULL,
+    CONSTRAINT "FK_MatchResults_Jobs_JobId" FOREIGN KEY ("JobId") REFERENCES "Jobs" ("Id") ON DELETE CASCADE,
+    CONSTRAINT "FK_MatchResults_Resumes_ResumeId" FOREIGN KEY ("ResumeId") REFERENCES "Resumes" ("Id") ON DELETE CASCADE
+);
+2026-05-31 20:08:30.746 +05:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_MatchResults_JobId" ON "MatchResults" ("JobId");
+2026-05-31 20:08:30.751 +05:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_MatchResults_ResumeId" ON "MatchResults" ("ResumeId");
+2026-05-31 20:08:30.803 +05:00 [INF] User profile is available. Using 'C:\Users\BOSS\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-05-31 20:08:31.019 +05:00 [INF] Now listening on: https://localhost:7001
+2026-05-31 20:08:31.022 +05:00 [INF] Now listening on: http://localhost:5001
+2026-05-31 20:08:31.027 +05:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-05-31 20:08:31.029 +05:00 [INF] Hosting environment: Development
+2026-05-31 20:08:31.031 +05:00 [INF] Content root path: C:\Users\BOSS\VS\ResumeMatcher
+2026-05-31 20:08:45.281 +05:00 [INF] Request starting HTTP/2 GET https://localhost:7001/ - null null
+2026-05-31 20:08:45.375 +05:00 [INF] Executing endpoint 'ResumeMatcher.Controllers.HomeController.Index (ResumeMatcher)'
+2026-05-31 20:08:45.469 +05:00 [INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index() on controller ResumeMatcher.Controllers.HomeController (ResumeMatcher).
+2026-05-31 20:08:46.493 +05:00 [INF] Executed DbCommand (11ms) [Parameters=[@p='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "m0"."Id", "m0"."AISummary", "m0"."AnalyzedAt", "m0"."JobId", "m0"."MatchScore", "m0"."MatchedSkills", "m0"."MissingSkills", "m0"."Recommendation", "m0"."ResumeId", "r"."Id", "r"."CandidateName", "r"."Education", "r"."Experience", "r"."ExtractedText", "r"."FileName", "r"."Skills", "r"."UploadedAt", "j"."Id", "j"."Company", "j"."CreatedAt", "j"."Description", "j"."IsActive", "j"."Location", "j"."RequiredExperience", "j"."RequiredSkills", "j"."Title"
+FROM (
+    SELECT "m"."Id", "m"."AISummary", "m"."AnalyzedAt", "m"."JobId", "m"."MatchScore", "m"."MatchedSkills", "m"."MissingSkills", "m"."Recommendation", "m"."ResumeId"
+    FROM "MatchResults" AS "m"
+    ORDER BY "m"."AnalyzedAt" DESC
+    LIMIT @p
+) AS "m0"
+INNER JOIN "Resumes" AS "r" ON "m0"."ResumeId" = "r"."Id"
+INNER JOIN "Jobs" AS "j" ON "m0"."JobId" = "j"."Id"
+ORDER BY "m0"."AnalyzedAt" DESC
+2026-05-31 20:08:46.566 +05:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM "Resumes" AS "r"
+2026-05-31 20:08:46.587 +05:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM "Jobs" AS "j"
+2026-05-31 20:08:46.603 +05:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM "MatchResults" AS "m"
+2026-05-31 20:08:46.631 +05:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "MatchResults" AS "m")
+2026-05-31 20:08:46.660 +05:00 [INF] Executing ViewResult, running view Index.
+2026-05-31 20:08:46.727 +05:00 [INF] Executed ViewResult - view Index executed in 63.8586ms.
+2026-05-31 20:08:46.735 +05:00 [INF] Executed action ResumeMatcher.Controllers.HomeController.Index (ResumeMatcher) in 1254.3046ms
+2026-05-31 20:08:46.746 +05:00 [INF] Executed endpoint 'ResumeMatcher.Controllers.HomeController.Index (ResumeMatcher)'
+2026-05-31 20:08:46.771 +05:00 [INF] Request finished HTTP/2 GET https://localhost:7001/ - 200 null text/html; charset=utf-8 1486.1114ms
+2026-05-31 20:18:08.276 +05:00 [INF] Application is shutting down...

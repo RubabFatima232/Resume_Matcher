@@ -1,0 +1,78 @@
+﻿@{
+    ViewData["Title"] = "AI Analyze";
+}
+
+<div style="max-width:620px;margin:0 auto;">
+    <div class="page-title">AI Resume Analyzer</div>
+    <div class="page-subtitle">Resume aur Job select karo — AI match score generate karega</div>
+
+    @{
+        var resumes = (List<ResumeMatcher.Models.Resume>)ViewBag.Resumes;
+        var jobs = (List<ResumeMatcher.Models.Job>)ViewBag.Jobs;
+    }
+
+    @if (!resumes.Any())
+    {
+        <div class="alert-danger">
+            <i class="fas fa-exclamation-triangle"></i> Koi resume nahi!
+            <a asp-controller="Resumes" asp-action="Upload" class="text-purple" style="margin-left:8px;font-weight:600;">Upload karo &rarr;</a>
+        </div>
+    }
+
+    @if (!jobs.Any())
+    {
+        <div class="alert-danger">
+            <i class="fas fa-exclamation-triangle"></i> Koi job nahi!
+            <a asp-controller="Jobs" asp-action="Create" class="text-purple" style="margin-left:8px;font-weight:600;">Add karo &rarr;</a>
+        </div>
+    }
+
+    @if (resumes.Any() && jobs.Any())
+    {
+        <div class="glass-card p-5" data-tilt data-tilt-max="3">
+            <form asp-action="Analyze" method="post" id="analyzeForm">
+                @Html.AntiForgeryToken()
+
+                <div class="form-group">
+                    <label class="form-label"><i class="fas fa-file-alt"></i> Resume Select Karo</label>
+                    <select name="resumeId" class="form-control">
+                        @foreach (var r in resumes)
+                        {
+                            <option value="@r.Id">@r.CandidateName — @r.FileName</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label"><i class="fas fa-briefcase"></i> Job Select Karo</label>
+                    <select name="jobId" class="form-control">
+                        @foreach (var j in jobs)
+                        {
+                            <option value="@j.Id">@j.Title — @j.Company</option>
+                        }
+                    </select>
+                </div>
+
+                <div id="submitSection">
+                    <button type="submit" class="btn btn-violet w-full justify-center" style="padding:14px;font-size:1rem;">
+                        <i class="fas fa-magic"></i> AI Se Analyze Karo
+                    </button>
+                </div>
+
+                <div id="loadingSection" style="display:none;text-align:center;padding:28px;">
+                    <div class="spinner"></div>
+                    <div class="text-muted">AI analyze kar raha hai... thoda wait karo</div>
+                </div>
+            </form>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        document.getElementById('analyzeForm')?.addEventListener('submit', function() {
+            document.getElementById('submitSection').style.display = 'none';
+            document.getElementById('loadingSection').style.display = 'block';
+        });
+    </script>
+}
